@@ -1,0 +1,7 @@
+flask
+Flask-Cors==3.0.3
+requests
+simplejson
+pymongo==3.6.1
+python-consul==0.7.2
+xmltodict

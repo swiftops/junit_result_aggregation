@@ -1,0 +1,23 @@
+.shared_hidden_key: &shared 
+  before_script:
+    - docker login -u "<username>" -p "<password>"
+
+stages:
+ - build_images
+ - deploy
+ 
+job1:
+  tags:
+    - micro_runner
+  <<: *shared
+  stage: build_images
+  script:
+  - docker build -t <image-name> .
+  - docker push <image-name>
+
+job2:
+  tags:
+    - micro_runner
+  stage: deploy
+  script:
+  - ssh -i /PATH/TO/AmazonCloudKeyPair.pem ubuntu@<"amazon public ip"> 'bash -s' < deploy.sh

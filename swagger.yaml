@@ -1,0 +1,11 @@
+swagger: '2.0'
+info:
+  description: >-
+   Please refer [editor.swagger.io](editor.swagger.io)
+  version: 1.0.0
+  title: Swagger API Document for your microservice
+  contact:
+    email: devops@digite.com
+  license:
+    name: DigiteDevOps1.0
+    url: 'http://www.digite.com'

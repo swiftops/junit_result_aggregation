@@ -1,0 +1,15 @@
+giturl = 'http://<gitserver_url_to_get_commitdata>'
+token_name = '<gittokenname>'
+token_value = '<gittokenvalue>'
+DB_IP = <DB IP>
+DB_PORT = <DB PORT NO.>
+remotevalue = 'refs/remotes/origin/'
+jenkins_url_prefix = 'http://<jenkins_private_url>/job/OnCommit/job/oncommit/'
+jenkins_url_postfix = '/api/json'
+jenkins_url_result = '/Report/'
+jenkins_username = '<username>'
+jenkins_password='<password>'
+defect_service_url = 'http://<IP>/junitdefectcreation/readJunitData'
+jenkins_public_url_prefix = 'http://<jenkins_public_url_>/job/OnCommit/job/oncommit/'
+DB_USERNAME = '<DB USERNAME>'
+DB_PASSWORD = '<DB PASSWORD>'
