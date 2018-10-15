@@ -1,17 +1,15 @@
 # PARSE XML & INSERT JUNITDATA MICROSERVICE
 
-### Introduction
-
-There are two microservices defined in this project: 
-# 1.junit_nightlybuild_data : 
-* As per the requirement this service is getting triggered from one of the jenkins job using curl command
+## Introduction
+This service parse Junit XML Result and insert it into Mongo DB. As per our requirement there were two methods defined in this service to insert data into Mongo DB which are as follows: 
+###  1.junit_nightlybuild_data : 
+* This service is getting triggered from CI pipeline using curl command.
 ```
 Command : curl --request POST --url "http://<MACHINE_IP>/junit_nightlybuild_data" --header "cache-control: no-cacheder" --header "content-type: application/xml" --header "BUILD_NO: $BUILD_NO" --header "REL_NO: $REL_NO" --header "JUNIT_URL: $JUNIT_URL" --header "Branch_Name: $Branch_Name" --data @TESTS-TestSuites.xml
 ```
 * Sample of Junit XML result can be seen in the root directory <TESTS-TestSuites.xml>
 * This service will parse the xml data and then insert an entry in Mongo DB in  below format :
 ```
-An Entry will be inserted inside Mongo DB in the below format :
         { "_id":"1223456789",
         "BranchName":"Rel_4.5.0",
         "Release No":"4.5.0",
@@ -21,10 +19,9 @@ An Entry will be inserted inside Mongo DB in the below format :
         }
 ```
 
-# 2. insertintomnogo : 
-* This service gets triggered from each developers machine when they commit anything on git as part of On commit pipeline.
-* As the junit stage is completed,its result in xml form is passed onto this service http://<MACHINE-IP>/junitparserservice/insertintomnogo which in turns gets the devloper's commit id details from gitserver & job details from jenkins and then
-insert it into mongo DB
+###  2. insertintomnogo : 
+* This service gets triggered from each developers machine when they commit anything on git as part of on-commit pipeline.
+* When junit stage is completed,its result in xml form is passed onto this service http://<MACHINE-IP>/junitparserservice/insertintomnogo which in turns gets the devloper's commit id details from gitserver & job details from jenkins and finally insert it into mongo DB
 ```
 An instance will be created in Mongo DB in the below format : 
         { "_id":"1234567",
@@ -40,10 +37,6 @@ An instance will be created in Mongo DB in the below format :
         "Junit_test":"{<Content of Testsuite XML in String format>}"
         } 
 ```
-
-#### service apis :
-* INSERT_INTO_MONGODB
-
 ### Pre-Requisite
 
 1. python 3.6.0 or above version.
@@ -51,7 +44,7 @@ An instance will be created in Mongo DB in the below format :
 3. MONGO DB
 4. Jenkins
 5. Git
-
+6. Please update map.py file for connection with Mongo DB, Jenkins & Git server
 
 ### Checkout Repository
 ```
