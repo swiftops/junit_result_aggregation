@@ -2,12 +2,12 @@
 
 ## Introduction
 This service parse Junit XML Result and insert it into Mongo DB. As per our requirement there were two methods defined in this service to insert data into Mongo DB which are as follows: 
-###  1.junit_nightlybuild_data : 
+###  1. junit_nightlybuild_data : 
 * This service is getting triggered from CI pipeline using curl command.
 ```
 Command : curl --request POST --url "http://<MACHINE_IP>/junit_nightlybuild_data" --header "cache-control: no-cacheder" --header "content-type: application/xml" --header "BUILD_NO: $BUILD_NO" --header "REL_NO: $REL_NO" --header "JUNIT_URL: $JUNIT_URL" --header "Branch_Name: $Branch_Name" --data @TESTS-TestSuites.xml
 ```
-* Sample of Junit XML result can be seen in the root directory <TESTS-TestSuites.xml>
+* Sample of Junit XML result can be seen in the example folder in projects root directory <TESTS-TestSuites.xml>
 * This service will parse the xml data and then insert an entry in Mongo DB in  below format :
 ```
         { "_id":"1223456789",
@@ -22,6 +22,7 @@ Command : curl --request POST --url "http://<MACHINE_IP>/junit_nightlybuild_data
 ###  2. insertintomnogo : 
 * This service gets triggered from each developers machine when they commit anything on git as part of on-commit pipeline.
 * When junit stage is completed,its result in xml form is passed onto this service http://<MACHINE-IP>/junitparserservice/insertintomnogo which in turns gets the devloper's commit id details from gitserver & job details from jenkins and finally insert it into mongo DB
+* Sample of Junit XML result can be seen in the example folder in projects root directory <TESTS-TestSuites.xml>
 ```
 An instance will be created in Mongo DB in the below format : 
         { "_id":"1234567",
